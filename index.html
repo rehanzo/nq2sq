@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Natural Question to Search Queries</title>
+  <script>
+    const rootPath = window.location.href.split('/').pop();
+    window.onload = function () {
+      document.getElementById("questionForm").onsubmit = function (e) {
+        e.preventDefault();
+        fetch(rootPath + '/api/', {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({question: document.getElementById("question").value})
+        }).then(response => response.json()).then(data => {
+          var queriesDiv = document.getElementById("queries");
+          queriesDiv.innerHTML = '';
+          queries = data.queries
+          var p = document.createElement("p");
+          p.innerText = queries;
+          queriesDiv.appendChild(p);
+        });
+      };
+    };
+  </script>
+</head>
+
+<body>
+  <form id="questionForm" action="/" method="post">
+    <textarea id="question" name="question" rows="4" cols="50" placeholder="Enter your question here"></textarea>
+    <input type="submit" value="Submit">
+  </form>
+  <div id="queries"></div>
+</body>
+
+</html>
