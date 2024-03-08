@@ -10,7 +10,7 @@ I played around with different models to test their performance and cost effecti
 [Live Demo](https://nq2sq.rehanzo.com)
 [API](https://nq2sq.rehanzo.com/api/)
 
-The 'index.html' file is what the live demo runs off of.
+The `index.html` file is what the live demo runs off of.
 
 ## Usage
 The api uses the [ctranslate]() library to interface with the model. Therefore, one needs to run the following prior to starting up the api, with the ctranslate module installed:
@@ -66,3 +66,8 @@ Given that it would likely take forever to finetune the model on my local hardwa
   "all-linear"
 ]
 ```
+
+# Limitations
+- Some particular questions return low quality queries
+- Some questions will return the same query over and over again
+  - This was mostly curbed by a repetition penalty of 1.3, but it still occurs occasionally. I'm hesitant to increase it because it then begins to affect query quality
